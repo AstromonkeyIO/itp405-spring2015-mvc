@@ -5,6 +5,8 @@ use DB;//must start the root
 use App\Models\dvdQuery;
 use App\Models\genresQuery;
 use App\Models\ratingsQuery;
+use App\Models\reviewsQuery;
+use App\Models\addNewDVD;
 
 class dvdsController extends Controller {
     
@@ -33,6 +35,47 @@ class dvdsController extends Controller {
            'dvds' => $dvds, 'rating' => $request->input('ratings'), 'genre' => $request->input('genres')   
            ]);
    }
+   
+   public function reviews($id) {
+       
+       
+       $query = new reviewsQuery();
+       $reviews = $query->getReviews($id);
+               
+       return view('reviews', ['dvd_id' => $id, 'reviews' => $reviews]);
+   }
+   
+   public function addReview(Request $request, $id) {
+
+     //dd($id);
+    $validation = addNewDVD::validate([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'rating' => $request->input('rating'),
+            'dvd_id' => $id
+        ]);
+
+    if($validation->passes()) {
+        addNewDVD::create([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'rating' => $request->input('rating'),
+            'dvd_id' => $id
+        ]);
+
+        return redirect('dvds/'.$id)->with('success', 'DVD successfully saved!');
+
+    } else {
+
+        return redirect('/dvds/'.$id)
+                ->withInput()
+                ->withErrors($validation);
+
+    }
+
+}
+
+   
     
 }
 
