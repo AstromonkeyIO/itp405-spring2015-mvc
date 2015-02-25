@@ -21,16 +21,17 @@
             
             <div class="form-group">
                 <label>Rating</label>            
-                <select name="rating" style="height: 200px;">
-                    <?php if(Request::old('rating')) : ?>
+                <select name="rating" style="height: 200px;">               
+                    <?php for($i = 1; $i <= 10; $i++) { ?>
+                    <?php if(Request::old('rating') == $i) : ?> 
                     <option value="<?php echo Request::old('rating') ?>" selected="selected">
                         <?php echo Request::old('rating') ?>
                     </option>                                
-                    <?php endif ?>                    
-                    <?php for($i = 1; $i <= 10; $i++) { ?>
+                   <?php else :?>
                         <option value="<?php echo $i ?>">
                             <?php echo $i ?>
                         </option>
+                    <?php endif ?>                          
                     <?php } ?>                   
                 </select> 
             </div>
