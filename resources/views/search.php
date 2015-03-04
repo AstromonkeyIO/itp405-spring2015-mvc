@@ -5,6 +5,16 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">        
     </head>
     <body style="text-align: center">
+        <div style="float:left" width="100px">
+            <?php foreach($genres as $genre) : ?>
+            <p>
+                <a href="/genres/<?php echo $genre->genre_name?>/dvds">
+                    <?php echo $genre->genre_name ?>
+                </a>
+            </p>
+            <?php endforeach ?>             
+        </div>
+        <div style="float:left" width="300px">
         <h1>DVD Search</h1>
         <form action="/dvds" method="get">
             <h1>
@@ -36,5 +46,6 @@
             <input class="btn btn-default" type="submit" value="Search">
             </p>
         </form>
+        </div>
     </body> 
 </html>
