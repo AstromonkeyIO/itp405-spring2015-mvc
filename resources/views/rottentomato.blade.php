@@ -6,7 +6,7 @@
         <div style="text-align: center">
         <center>
         @if($noData)
-            <p>{{$noData}}</p>
+            <p>No Result Found!</p>
         @else
        
         @foreach ($rottenTomatoData as $movie)

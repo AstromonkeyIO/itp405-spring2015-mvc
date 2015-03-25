@@ -21,11 +21,25 @@ Route::get('rottentomato/{searchTerm?}', function($searchTerm) {
    $rottenTomatoes = new RottenTomatoes(); 
    $movies = $rottenTomatoes->search($searchTerm); 
  
-  return view('rottentomato', [
-    'rottenTomatoData' => $movies,
-    'noData' => ''
-  ]); 
-      
+   if(!$movies) 
+   {
+
+    return view('rottentomato', [
+      'rottenTomatoData' => $movies,
+      'noData' => 1
+    ]);       
+
+   }
+   else
+   {
+       
+    return view('rottentomato', [
+      'rottenTomatoData' => $movies,
+      'noData' => ''
+    ]);       
+  
+   }
+
    /* 
    if(Cache::has("rottentomato-$searchTerm")) {
        
