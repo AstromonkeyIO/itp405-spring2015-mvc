@@ -1,4 +1,6 @@
 <?php
+//use App\Services\RottenTomatoes;
+use App\Services\RottenTomatoes;
 
 Route::get('home', 'HomeController@index');
 Route::get('/dvds/search', 'dvdsController@search');
@@ -16,7 +18,15 @@ Route::get('/dvds/{id}', 'dvdsController@reviews');
 
 Route::get('rottentomato/{searchTerm?}', function($searchTerm) {
  
-    
+   $rottenTomatoes = new RottenTomatoes(); 
+   $movies = $rottenTomatoes->search($searchTerm); 
+ 
+  return view('rottentomato', [
+    'rottenTomatoData' => $movies,
+    'noData' => ''
+  ]); 
+      
+   /* 
    if(Cache::has("rottentomato-$searchTerm")) {
        
        $jsonString = Cache::get("rottentomato-$searchTerm");
@@ -44,7 +54,7 @@ Route::get('rottentomato/{searchTerm?}', function($searchTerm) {
     'rottenTomatoData' => $rottenTomatoData->movies,
     'noData' => ''
   ]); 
-   
+   */
    
    
     

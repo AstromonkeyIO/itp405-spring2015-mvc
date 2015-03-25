@@ -1,5 +1,8 @@
 <?php namespace App\Services;
 
+use Illuminate\Support\Facades\Cache;
+
+
 class RottenTomatoes {
     
     public function search($dvd_title) 
